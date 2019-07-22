@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import moment from 'moment'
 import data from '../../data.json'
 import { Button, Image, Layout, LayoutLeft, LayoutRight, List, Title } from './styles'
@@ -56,11 +56,15 @@ export const CharacterDetails = ({ id }) => {
               ? <span>{character.alive ? 'Está vivo 🧙‍♂️' : 'Está muerto 💀'}</span>
               : <span>{character.alive ? 'Está viva 🧙‍♀️' : 'Está muerta 💀'}</span>
           }</CharacterData>
+          <CharacterData title='Casa en Hogwarts'>{character.house !== '' ? character.house : '-'}</CharacterData>
           <CharacterData title='Tipo de sangre'>{translateAncestry(character.ancestry)}</CharacterData>
           <CharacterData title='Fecha de nacimiento'>{formatDate(character.dateOfBirth)}</CharacterData>
           <CharacterData title='Color de ojos'>{translateColor(character.eyeColour, 'eye')}</CharacterData>
           <CharacterData title='Color de pelo'>{translateColor(character.hairColour)}</CharacterData>
           <CharacterData title='Género'>{isMale ? 'Masculino' : 'Femenino'}</CharacterData>
+          <CharacterData title='Staff de Hogwarts'>{character.hogwartsStaff ? 'Si' : 'No'}</CharacterData>
+          <CharacterData title='Estudiante de Hogwarts'>{character.hogwartsStudent ? 'Si' : 'No'}</CharacterData>
+          <CharacterData title='Patronus'>{character.patronus}</CharacterData>
         </List>
         <Button to='/' data-house={houseOrUnknown}>Atrás</Button>
       </LayoutRight>
