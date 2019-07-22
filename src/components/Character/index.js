@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CharacterCard, Image, Name } from './styles'
+import { CharacterCard, Image, Name, Link } from './styles'
 
 export const Character = ({ id, actor, alive, ancestry, dateOfBirth, eyeColour, gender,
   hairColour, hogwartsStaff, hogwartsStudent, house, image, name, patronus, species, wand,
@@ -10,16 +10,20 @@ export const Character = ({ id, actor, alive, ancestry, dateOfBirth, eyeColour, 
   const images = require.context('../../assets', true)
   const characterImagePath = images(`./${image}`)
 
+  const houseOrUnknown = house !== '' ? house : 'Unknown'
+
   return (
-    <CharacterCard data-house={house}>
-      <Name>{name}</Name>
-      <Image src={characterImagePath} />
-      <h3>Actor: {actor}</h3>
-      {
-        isMale
-          ? <p>{alive ? 'Está vivo 🧙‍♂️' : 'Está muerto 💀'}</p>
-          : <p>{alive ? 'Está viva 🧙‍♀️' : 'Está muerta 💀'}</p>
-      }
+    <CharacterCard data-house={houseOrUnknown}>
+      <Link to={`/character/${id}`}>
+        <Name>{name}</Name>
+        <Image src={characterImagePath} />
+        <h3>Actor: {actor}</h3>
+        {
+          isMale
+            ? <p>{alive ? 'Está vivo 🧙‍♂️' : 'Está muerto 💀'}</p>
+            : <p>{alive ? 'Está viva 🧙‍♀️' : 'Está muerta 💀'}</p>
+        }
+      </Link>
     </CharacterCard>
   )
 }

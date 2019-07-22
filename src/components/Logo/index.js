@@ -1,8 +1,8 @@
 import React from 'react'
-import { Title } from './styles'
+import { Link, Title } from './styles'
 
 export const Logo = () => {
   return (
-    <Title>Harry Potter API</Title>
+    <Link to='/'><Title>Harry Potter API</Title></Link>
   )
 }

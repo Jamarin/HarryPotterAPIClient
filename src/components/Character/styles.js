@@ -1,24 +1,34 @@
 import styled from 'styled-components'
+import { Link as LinkRouter } from '@reach/router'
 
 export const CharacterCard = styled.div`
   border: 1px solid #eee;
-  box-shadow: 0 0 8px rgba(0,0,0,.3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, .3);
   display: grid;
   height: 100%;
   text-align: center;
   width: 100%;
 
   &[data-house='Gryffindor'] {
-    background-color: red;
+    background-color: #9c1203;
   }
   &[data-house='Slytherin'] {
-    background-color: green;
+    background-color: #033807;
   }
   &[data-house='Ravenclaw'] {
-    background-color: blue;
+    background-color: #00165e;
   }
   &[data-house='Hufflepuff'] {
-    background-color: yellow;
+    background-color: #e3a000;
+  }
+  &[data-house='Unknown'] {
+    background-color: #2d004d;
+  }
+
+  transition: .3s;
+
+  &:hover {
+    transform: scale(1.05);
   }
 `
 
@@ -33,4 +43,9 @@ export const Image = styled.img`
   object-fit: cover;
   object-position: top;
   overflow: hidden;
+`
+
+export const Link = styled(LinkRouter)`
+  text-decoration: none;
+  color: #FFF;
 `
