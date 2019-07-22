@@ -20,4 +20,16 @@ export const FilterGroup = styled.div`
 export const FilterForm = styled.form`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    
+  }
 `
