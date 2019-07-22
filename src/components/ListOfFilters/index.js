@@ -1,8 +1,9 @@
 import React from 'react'
 import { CheckboxFilter } from '../CheckboxFilter'
+import { TextFilter } from '../TextFilter'
 import { FilterGroup, FilterForm, List, Title } from './styles'
 
-export const ListOfFilters = ({ handleHouseChange, handleGenderChange, handleStatusChange, house, gender, status }) => {
+export const ListOfFilters = ({ handleHouseChange, handleGenderChange, handleStatusChange, handleTextNameChange, house, gender, status, textName }) => {
   return (
     <FilterForm>
       <FilterGroup>
@@ -28,6 +29,10 @@ export const ListOfFilters = ({ handleHouseChange, handleGenderChange, handleSta
           <CheckboxFilter name='status' id='alive' onChange={handleStatusChange} checked={status.alive} />
           <CheckboxFilter name='status' id='dead' onChange={handleStatusChange} checked={status.dead} />
         </List>
+      </FilterGroup>
+      <FilterGroup>
+        <Title>Selección por nombre</Title>
+        <TextFilter name='name' descriptiveName='Nombre del personaje' id='name' onChange={handleTextNameChange} value={textName} />
       </FilterGroup>
     </FilterForm>
   )

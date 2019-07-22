@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { Character } from '../Character'
 // import { useFetch } from '../../hooks/useFetch'
 import { ListOfFilters } from '../ListOfFilters'
@@ -23,7 +23,8 @@ export const ListOfCharacters = () => {
         (char.gender === 'female' && gender.female)
       const filterByStatus = (char.alive && status.alive) ||
         (!char.alive && status.dead)
-      return filterByHouse && filterByGender && filterByStatus
+      const filterByTextName = textName !== '' ? char.name.toLowerCase().includes(textName.toLowerCase()) : true
+      return filterByHouse && filterByGender && filterByStatus && filterByTextName
     })
     return newData
   }
@@ -43,6 +44,7 @@ export const ListOfCharacters = () => {
     alive: true,
     dead: true
   })
+  const [textName, setTextName] = useState('')
   const [ownData, setOwnData] = useState(data)
 
   const handleHouseChange = e => {
@@ -50,26 +52,32 @@ export const ListOfCharacters = () => {
     console.log(house[e.target.value])
     localHouse[e.target.value] = e.target.checked
     setHouse(localHouse)
-    setOwnData(usefulData())
   }
 
   const handleGenderChange = e => {
     const localGender = gender
     localGender[e.target.value] = e.target.checked
     setGender(localGender)
-    setOwnData(usefulData())
   }
 
   const handleStatusChange = e => {
     const localStatus = status
     localStatus[e.target.value] = e.target.checked
     setStatus(localStatus)
-    setOwnData(usefulData())
   }
+
+  const handleTextNameChange = e => {
+    const localTextName = e.target.value
+    setTextName(localTextName)
+  }
+
+  useEffect(() => {
+    setOwnData(usefulData())
+  })
 
   return (
     <Fragment>
-      <ListOfFilters handleGenderChange={handleGenderChange} handleHouseChange={handleHouseChange} handleStatusChange={handleStatusChange} house={house} gender={gender} status={status} />
+      <ListOfFilters handleGenderChange={handleGenderChange} handleHouseChange={handleHouseChange} handleStatusChange={handleStatusChange} handleTextNameChange={handleTextNameChange} house={house} gender={gender} status={status} textName={textName} />
       <ListOfCharacterCards>
         {
           ownData.map((eachCharacter, idx) => {
