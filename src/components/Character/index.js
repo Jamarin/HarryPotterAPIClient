@@ -2,26 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CharacterCard, Image, Name, Link } from './styles'
 
-export const Character = ({ id, actor, alive, ancestry, dateOfBirth, eyeColour, gender,
-  hairColour, hogwartsStaff, hogwartsStudent, house, image, name, patronus, species, wand,
-  yearOfBirth }) => {
+export const Character = ({ id, actors, status, blood_status, birth_date, gender,
+  school_house, image, name, race, wands, year_of_birth }) => {
   const isMale = (gender === 'male')
 
-  const images = require.context('../../assets', true)
-  const characterImagePath = images(`./${image}`)
-
-  const houseOrUnknown = house !== '' ? house : 'Unknown'
+  const houseOrUnknown = school_house.name !== '' ? school_house.name : 'Unknown'
 
   return (
     <CharacterCard data-house={houseOrUnknown}>
       <Link to={`/character/${id}`}>
         <Name>{name}</Name>
-        <Image src={characterImagePath} />
-        <h3>Actor: {actor}</h3>
+        <Image src={image} />
+        <h3>Actor: {actors[0].name}</h3>
         {
           isMale
-            ? <p>{alive ? 'Está vivo 🧙‍♂️' : 'Está muerto 💀'}</p>
-            : <p>{alive ? 'Está viva 🧙‍♀️' : 'Está muerta 💀'}</p>
+            ? <p>{status === 'alive' ? 'Está vivo 🧙‍♂️' : 'Está muerto 💀'}</p>
+            : <p>{status === 'alive' ? 'Está viva 🧙‍♀️' : 'Está muerta 💀'}</p>
         }
       </Link>
     </CharacterCard>

@@ -7,8 +7,8 @@ export function useFetch (url) {
   async function fetchUrl () {
     const response = await window.fetch(url)
     const json = await response.json()
-
-    setData(json)
+    const ownData = await json.data
+    setData(ownData)
     setLoading(false)
   }
 
