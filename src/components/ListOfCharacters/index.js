@@ -12,6 +12,7 @@ String.prototype.capitalize = function () { // eslint-disable-line no-extend-nat
 export const ListOfCharacters = () => {
   /* const [data, loading] = useFetch('http://hp-api.herokuapp.com/api/characters') */
   const [data, loading] = useFetch('http://127.0.0.1:8000/api/character')
+  const [ownData, setOwnData] = useState([])
 
   const usefulData = () => {
     let newFilteredData = []
@@ -26,12 +27,11 @@ export const ListOfCharacters = () => {
         (char.gender === 'female' && gender.female)
         const filterByStatus = (char.status === 'alive' && status.alive) ||
         (char.status === 'dead' && status.dead)
-        const filterByTextName = textName !== '' ? char.name.toLowerCase().includes(textName.toLowerCase()) : true
+        const filterByTextName = textName.length > 2 ? char.name.toLowerCase().includes(textName.toLowerCase()) : true
         return filterByHouse && filterByGender && filterByStatus && filterByTextName
       })
     }
     return newFilteredData
-    // return data
   }
 
   const [house, setHouse] = useState({
@@ -50,38 +50,33 @@ export const ListOfCharacters = () => {
     dead: true
   })
   const [textName, setTextName] = useState('')
-  const [ownData, setOwnData] = useState([])
 
   const handleHouseChange = e => {
     const localHouse = house
     localHouse[e.target.value] = e.target.checked
     setHouse(localHouse)
-    setOwnData(usefulData())
   }
 
   const handleGenderChange = e => {
     const localGender = gender
     localGender[e.target.value] = e.target.checked
     setGender(localGender)
-    setOwnData(usefulData())
   }
 
   const handleStatusChange = e => {
     const localStatus = status
     localStatus[e.target.value] = e.target.checked
     setStatus(localStatus)
-    setOwnData(usefulData())
   }
 
   const handleTextNameChange = e => {
     const localTextName = e.target.value
     setTextName(localTextName)
-    setOwnData(usefulData())
   }
 
   useEffect(() => {
     setOwnData(usefulData())
-  }, [data])
+  }, [ownData, loading])
 
   return (loading) ? '<h2>No hay datos...</h2>'
     : (
